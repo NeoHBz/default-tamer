@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Fork**: This project is a custom fork maintained by NeoHBz (github.com/neohbz)! Added about page reference.
+- **Priority Open Browsers System**: Automatically route URLs to the first active/running browser from a custom prioritized list before deciding to use a strict fallback browser. Included First-Run onboarding and Activity Log support.
+- Refactored `DefaultBrowserSettingsView` for centralized settings logic across Preferences and FirstRun views.
+
 ## [0.0.7] - 2026-03-19
 
 ### Fixed

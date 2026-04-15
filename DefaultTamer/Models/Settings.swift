@@ -16,6 +16,8 @@ struct Settings: Codable {
     var launchAtLogin: Bool
     var telemetryEnabled: Bool? // nil = not asked, true = opt-in, false = opt-out
     var hasCreatedFirstRule: Bool
+    var prioritizeOpenBrowsers: Bool
+    var priorityBrowserIds: [String]
     
     init(
         enabled: Bool = true,
@@ -24,7 +26,9 @@ struct Settings: Codable {
         diagnosticsEnabled: Bool = false,
         launchAtLogin: Bool = false,
         telemetryEnabled: Bool? = nil,
-        hasCreatedFirstRule: Bool = false
+        hasCreatedFirstRule: Bool = false,
+        prioritizeOpenBrowsers: Bool = false,
+        priorityBrowserIds: [String] = []
     ) {
         self.enabled = enabled
         self.fallbackBrowserId = fallbackBrowserId
@@ -33,6 +37,8 @@ struct Settings: Codable {
         self.launchAtLogin = launchAtLogin
         self.telemetryEnabled = telemetryEnabled
         self.hasCreatedFirstRule = hasCreatedFirstRule
+        self.prioritizeOpenBrowsers = prioritizeOpenBrowsers
+        self.priorityBrowserIds = priorityBrowserIds
     }
 
     static let `default` = Settings()

@@ -66,8 +66,19 @@ class Router {
             appLogger.info("🔀 ❌ Rule didn't match")
         }
         
-        // No rule matched, use fallback
-        appLogger.info("🔀 No rules matched, using fallback")
+        // No rule matched, evaluate global priority open browsers list
+        if settings.prioritizeOpenBrowsers && !settings.priorityBrowserIds.isEmpty {
+            let runningApps = NSWorkspace.shared.runningApplications.compactMap { $0.bundleIdentifier }
+            for browserId in settings.priorityBrowserIds {
+                if runningApps.contains(browserId) {
+                    appLogger.info("🔀 Priority open browser matched: \(browserId, privacy: .public)")
+                    return .openInBrowser(bundleId: browserId, matchedRule: nil)
+                }
+            }
+        }
+        
+        // No priority browsers running (or priority disabled), use fallback
+        appLogger.info("🔀 No rules or priority browsers matched, using fallback")
         return .openInFallback
     }
     

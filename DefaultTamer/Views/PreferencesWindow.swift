@@ -156,51 +156,7 @@ struct GeneralTab: View {
             }
             
             Section {
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Fallback Browser")
-                            .font(.subheadline)
-                        Text("Browser to use when no rules match")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    Spacer()
-                    
-                    Picker("", selection: Binding(
-                        get: { appState.settings.fallbackBrowserId },
-                        set: { appState.setFallbackBrowser($0) }
-                    )) {
-                        ForEach(appState.browserManager.availableBrowsers) { browser in
-                            Label {
-                                Text(browser.displayName)
-                            } icon: {
-                                if let icon = browser.getIcon() {
-                                    Image(nsImage: icon)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                }
-                            }
-                            .tag(browser.id)
-                        }
-                    }
-                    .labelsHidden()
-                    .fixedSize()
-                    
-                    Button(action: {
-                        appState.browserManager.refreshBrowsers()
-                    }) {
-                        if appState.browserManager.isRefreshingBrowsers {
-                            ProgressView()
-                                .controlSize(.small)
-                        } else {
-                            Image(systemName: "arrow.clockwise")
-                        }
-                    }
-                    .buttonStyle(.borderless)
-                    .disabled(appState.browserManager.isRefreshingBrowsers)
-                    .help("Refresh browser list")
-                }
+                DefaultBrowserSettingsView()
             } header: {
                 Text("Default Browser")
                     .font(.headline)
@@ -912,7 +868,7 @@ struct ActivityRowView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "arrow.down.circle.fill")
                             .font(.caption)
-                        Text("Fallback")
+                        Text("Default Browser - Priority/Fallback")
                             .font(.caption)
                     }
                     .foregroundColor(.orange)
@@ -1099,17 +1055,32 @@ struct AboutTab: View {
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
             
-            HStack(spacing: 4) {
-                Text("Made by")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                Link("0xdps", destination: URL(string: ExternalLinks.developerWebsite)!)
-                    .font(.caption)
-                Text("·")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                Link("defaulttamer.app", destination: URL(string: ExternalLinks.website)!)
-                    .font(.caption)
+            VStack(spacing: 8) {
+                HStack(spacing: 4) {
+                    Text("Made by")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Link("0xdps", destination: URL(string: ExternalLinks.developerWebsite)!)
+                        .font(.caption)
+                    Text("·")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Link("defaulttamer.app", destination: URL(string: ExternalLinks.website)!)
+                        .font(.caption)
+                }
+                
+                HStack(spacing: 4) {
+                    Text("Forked by")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Link("NeoHBz", destination: URL(string: "https://neohbz.com")!)
+                        .font(.caption)
+                    Text("·")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Link("github.com/neohbz", destination: URL(string: "https://github.com/neohbz")!)
+                        .font(.caption)
+                }
             }
             
             Spacer()

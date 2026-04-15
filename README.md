@@ -1,4 +1,4 @@
-# Default Tamer
+# Default Tamer (NeoHBz Fork)
 
 [![Latest Release](https://img.shields.io/github/v/release/0xdps/default-tamer?color=orange&label=Download)](https://github.com/0xdps/default-tamer/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -6,6 +6,7 @@
 [![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)](https://swift.org)
 
 > A macOS menu bar utility that intelligently routes URLs to the correct browser based on source app and URL rules.
+> **This is a custom fork maintained by NeoHBz ([github.com/neohbz](https://github.com/neohbz)), featuring extended routing configurations.**
 
 **Set Default Tamer as your default browser once — from then on, your links open exactly where you want them.**
 
@@ -13,6 +14,7 @@
 
 ## Features
 
+- **Priority Open/Running Browsers (Fork Exclusive)** — Dynamically check which browsers are currently open and route your links to them based on a prioritized list before triggering standard Fallback logic.
 - **Smart Routing** — Route links based on source app (Slack, Cursor, etc.) and URL patterns
 - **Domain Rules** — Send specific domains to specific browsers
 - **Override Chooser** — Hold ⌥ Option while clicking any link to manually pick a browser

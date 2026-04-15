@@ -304,7 +304,7 @@ class AppState: ObservableObject {
                     matchedRule: matchedRule,
                     targetBrowserId: bundleId,
                     targetBrowserName: browserName,
-                    fallbackUsed: false
+                    fallbackUsed: matchedRule == nil
                 )
             }
 
