@@ -166,7 +166,7 @@ class BrowserManager: ObservableObject {
     /// Async wrapper for browser discovery — caps at 5s so isRefreshingBrowsers
     /// can never get permanently stuck if LSCopyApplicationURLsForURL hangs.
     private func performDiscovery() async -> [Browser] {
-        let discoveryTask = Task.detached(priority: .userInitiated) {
+        let discoveryTask = Task(priority: .userInitiated) {
             Self.performDiscoverySync()
         }
         let timeoutTask = Task {

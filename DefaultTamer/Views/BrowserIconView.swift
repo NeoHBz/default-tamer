@@ -57,7 +57,7 @@ struct BrowserIconView: View {
         
         // Load icon asynchronously
         let bundleId = browser.id
-        let loadedIcon = await Task.detached(priority: .utility) { () -> NSImage? in
+        let loadedIcon = await Task(priority: .utility) { () -> NSImage? in
             guard let appURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleId) else {
                 return nil
             }

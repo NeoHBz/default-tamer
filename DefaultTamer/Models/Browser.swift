@@ -54,7 +54,7 @@ struct Browser: Identifiable, Codable, Hashable {
         
         // Load icon on background thread
         let bundleId = self.id
-        let icon = await Task.detached(priority: .utility) {
+        let icon = await Task(priority: .utility) {
             guard let appURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleId) else {
                 // Return default browser icon if app not found
                 return NSImage(systemSymbolName: "globe", accessibilityDescription: "Browser")

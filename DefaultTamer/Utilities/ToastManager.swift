@@ -197,6 +197,7 @@ struct ToastOverlay: ViewModifier {
 
 extension View {
     /// Apply toast overlay to any view
+    @MainActor
     func toastOverlay(manager: ToastManager = .shared) -> some View {
         modifier(ToastOverlay(toastManager: manager))
     }
