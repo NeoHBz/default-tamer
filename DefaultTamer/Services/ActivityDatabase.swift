@@ -17,21 +17,21 @@ class ActivityDatabase {
     private let metadata = Table("metadata")
     
     // Column definitions
-    private let id = Expression<String>(value: "id")
-    private let timestamp = Expression<Date>(value: "timestamp")
-    private let url = Expression<String>(value: "url")
-    private let urlHost = Expression<String>(value: "url_host")
-    private let sourceApp = Expression<String?>(value: "source_app")
-    private let matchedRuleId = Expression<String?>(value: "matched_rule_id")
-    private let matchedRuleType = Expression<String?>(value: "matched_rule_type")
-    private let targetBrowserId = Expression<String>(value: "target_browser_id")
-    private let targetBrowserName = Expression<String>(value: "target_browser_name")
-    private let fallbackUsed = Expression<Bool>(value: "fallback_used")
-    private let success = Expression<Bool>(value: "success")
+    private let id = Expression<String>("id", [])
+    private let timestamp = Expression<Date>("timestamp", [])
+    private let url = Expression<String>("url", [])
+    private let urlHost = Expression<String>("url_host", [])
+    private let sourceApp = Expression<String?>("source_app", [])
+    private let matchedRuleId = Expression<String?>("matched_rule_id", [])
+    private let matchedRuleType = Expression<String?>("matched_rule_type", [])
+    private let targetBrowserId = Expression<String>("target_browser_id", [])
+    private let targetBrowserName = Expression<String>("target_browser_name", [])
+    private let fallbackUsed = Expression<Bool>("fallback_used", [])
+    private let success = Expression<Bool>("success", [])
     
     // Metadata columns
-    private let key = Expression<String>(value: "key")
-    private let value = Expression<String>(value: "value")
+    private let key = Expression<String>("key", [])
+    private let value = Expression<String>("value", [])
     
     private init() {
         setupDatabase()
