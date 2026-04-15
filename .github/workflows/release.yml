@@ -46,7 +46,8 @@ jobs:
         run: |
           mkdir -p build dist
           
-          # Build without code signing
+          # Build with ad-hoc signing (-) which counts as "unsigned" for distribution
+          # but allows the build to complete without RegisterExecutionPolicyException
           xcodebuild -scheme DefaultTamer \
             -configuration Release \
             -derivedDataPath build/DerivedData \
@@ -56,8 +57,9 @@ jobs:
             CURRENT_PROJECT_VERSION=${{ github.run_number }} \
             ONLY_ACTIVE_ARCH=NO \
             CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_ALLOWED=YES \
+            CODE_SIGN_IDENTITY="-" \
+            AD_HOC_CODE_SIGNING_ALLOWED=YES \
             build
 
           # Copy app to a staging area
