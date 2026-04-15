@@ -16,22 +16,22 @@ class ActivityDatabase {
     private let routeLogs = Table("route_logs")
     private let metadata = Table("metadata")
     
-    // Column definitions
-    private let id = Expression<String>("id")
-    private let timestamp = Expression<Date>("timestamp")
-    private let url = Expression<String>("url")
-    private let urlHost = Expression<String>("url_host")
-    private let sourceApp = Expression<String?>("source_app")
-    private let matchedRuleId = Expression<String?>("matched_rule_id")
-    private let matchedRuleType = Expression<String?>("matched_rule_type")
-    private let targetBrowserId = Expression<String>("target_browser_id")
-    private let targetBrowserName = Expression<String>("target_browser_name")
-    private let fallbackUsed = Expression<Bool>("fallback_used")
-    private let success = Expression<Bool>("success")
+    // Column definitions — use literal: form to avoid WMO overload ambiguity in SQLite.swift 0.15.4
+    private let id = Expression<String>(literal: "id")
+    private let timestamp = Expression<Date>(literal: "timestamp")
+    private let url = Expression<String>(literal: "url")
+    private let urlHost = Expression<String>(literal: "url_host")
+    private let sourceApp = Expression<String?>(literal: "source_app")
+    private let matchedRuleId = Expression<String?>(literal: "matched_rule_id")
+    private let matchedRuleType = Expression<String?>(literal: "matched_rule_type")
+    private let targetBrowserId = Expression<String>(literal: "target_browser_id")
+    private let targetBrowserName = Expression<String>(literal: "target_browser_name")
+    private let fallbackUsed = Expression<Bool>(literal: "fallback_used")
+    private let success = Expression<Bool>(literal: "success")
     
     // Metadata columns
-    private let key = Expression<String>("key")
-    private let value = Expression<String>("value")
+    private let key = Expression<String>(literal: "key")
+    private let value = Expression<String>(literal: "value")
     
     private init() {
         setupDatabase()

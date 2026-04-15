@@ -71,6 +71,8 @@ targets:
         Release:
           CODE_SIGN_IDENTITY: "Developer ID Application"
           CODE_SIGN_STYLE: Manual
+          SWIFT_COMPILATION_MODE: singlefile
+          SWIFT_STRICT_CONCURRENCY: minimal
     dependencies:
       - package: SQLite
         product: SQLite
