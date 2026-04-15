@@ -1,6 +1,6 @@
 # Default Tamer (NeoHBz Fork)
 
-[![Latest Release](https://img.shields.io/github/v/release/0xdps/default-tamer?color=orange&label=Download)](https://github.com/0xdps/default-tamer/releases/latest)
+[![Latest Release](https://img.shields.io/github/v/release/neohbz/default-tamer?color=orange&label=Download)](https://github.com/neohbz/default-tamer/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![macOS](https://img.shields.io/badge/macOS-13.0+-blue.svg)](https://www.apple.com/macos/)
 [![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)](https://swift.org)
@@ -25,7 +25,7 @@
 
 ## Installation
 
-Download **[DefaultTamer-v0.0.7.dmg](https://github.com/0xdps/default-tamer/releases/download/v0.0.7/DefaultTamer-v0.0.7.dmg)** — or browse all releases on the [Releases page](https://github.com/0xdps/default-tamer/releases).
+Download **[DefaultTamer-v0.0.7.dmg](https://github.com/neohbz/default-tamer/releases/download/v0.0.7/DefaultTamer-v0.0.7.dmg)** — or browse all releases on the [Releases page](https://github.com/neohbz/default-tamer/releases).
 
 Once downloaded, open the DMG and drag Default Tamer to Applications, then:
 
