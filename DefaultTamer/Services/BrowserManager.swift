@@ -332,13 +332,19 @@ class BrowserManager: ObservableObject {
         var openError: Error?
         let semaphore = DispatchSemaphore(value: 0)
         
-        NSWorkspace.shared.open([url], withApplicationAt: appURL, configuration: configuration) { _, error in
+        NSWorkspace.shared.open([url], withApplicationAt: appURL, configuration: configuration) { runningApp, error in
             openError = error
+            
+            // Explicitly activate the browser. This is crucial when opening links from full-screen apps,
+            // as 'configuration.activates = true' alone sometimes fails to bring the app to the front.
+            let appToActivate = runningApp ?? NSRunningApplication.runningApplications(withBundleIdentifier: bundleId).first
+            appToActivate?.activate(options: .activateIgnoringOtherApps)
+            
             semaphore.signal()
         }
         
         // Wait for open operation (with timeout)
-        _ = semaphore.wait(timeout: .now() + 5.0)
+        _ = semaphore.wait(timeout: .now() + TimeConstants.browserOpenTimeout)
         
         if let error = openError {
             throw BrowserError.openFailed(bundleId: bundleId, underlying: error)
@@ -367,6 +373,8 @@ class BrowserManager: ObservableObject {
         }
 
         // Build command to open browser with private mode flags
+        // We use /usr/bin/open because it reliably handles passing arguments to already-running 
+        // browsers, which NSWorkspace.OpenConfiguration may ignore for running apps.
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/usr/bin/open")
         process.arguments = ["-a", appURL.path] + privateArgs + [url.absoluteString]
@@ -377,6 +385,11 @@ class BrowserManager: ObservableObject {
 
             if process.terminationStatus == 0 {
                 debugLog("✅ Opened \(url.absoluteString) in \(bundleId) (private mode)")
+                
+                // Explicitly activate the browser to ensure it comes to the front.
+                if let app = NSRunningApplication.runningApplications(withBundleIdentifier: bundleId).first {
+                    app.activate(options: .activateIgnoringOtherApps)
+                }
             } else {
                 throw BrowserError.openFailed(bundleId: bundleId, underlying: NSError(domain: "ProcessError", code: Int(process.terminationStatus)))
             }
