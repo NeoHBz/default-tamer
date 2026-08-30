@@ -1,16 +1,20 @@
 name: CodeQL
 
+# Runs only on the default branch (trunk). No pull_request trigger, no weekly cron.
 on:
   push:
-    branches: [trunk, main]
+    branches: [trunk]
     paths-ignore:
       - '**.md'
       - 'DefaultTamerWeb/**'
       - 'LICENSE'
-  pull_request:
-    branches: [trunk, main]
-  schedule:
-    - cron: '0 8 * * 1'
+      - 'VERSION.txt'
+  workflow_dispatch:
+
+# Only the newest run per branch survives; older in-progress runs are cancelled.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   analyze:
